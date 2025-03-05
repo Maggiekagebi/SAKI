@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
                         ]
                     },
-                    { id: 'contact', text: '聯絡我', link: 'contact.html' }
+                    // { id: 'contact', text: '聯絡我', link: 'contact.html' }
                 ],
                 
                 // 部落格分類

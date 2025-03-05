@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // 當前活動的下拉選單
         activeDropdown: null,
-        
+
                 // 個人資料
                 personalInfo: {
                     name: '咲 (SAKI)',
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
                 ]
             },
-            { id: 'contact', text: '聯絡我', link: 'contact.html' }
+            // { id: 'contact', text: '聯絡我', link: 'contact.html' }
         ],
                 
                 // 作品集
@@ -110,17 +110,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.projects = [
                     {
                         id: 1,
-                        title: '品牌識別設計',
+                        title: '蓮藕大王品牌網頁設計',
                         category: '品牌設計',
-                        description: '為本地咖啡店設計的完整品牌識別，包括標誌、包裝和宣傳材料。注重簡約風格與實用性，同時保持品牌的獨特性和識別度。',
-                        image: 'https://via.placeholder.com/600x400'
+                        description: '為蓮藕大王設計。\n網頁主要功能：商品管理、會員管理、購物車功能。\n技術架構:Laravel、MVC框架。\n前端:HTML、CSS、Bootstrap、JQuery。\n後端:PHP、MySQL、JS。',
+                        image: 'images/portfolio-images/lotusroot.svg'
                     },
                     {
                         id: 2,
                         title: '個人網站設計',
                         category: '網頁設計',
-                        description: '自己設計個人網站，作品展示和分享美食、旅遊、學習筆記。網站採用響應式設計，在各種設備上都能完美顯示。\n使用技能:HTML、CSS、RWD、Vue.js',
-                        image: 'https://via.placeholder.com/600x400'
+                        description: '自己設計個人網站，作品展示和分享美食、旅遊、學習筆記。\n網站採用響應式設計，在各種設備上都能完美顯示。\n使用技能:HTML、CSS、RWD、Vue.js',
+                        image: 'images/Logo.svg'
                     },
                     {
                         id: 3,

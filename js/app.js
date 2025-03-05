@@ -29,7 +29,7 @@ data() {
                     { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
                 ]
             },
-            { id: 'contact', text: '聯絡我', link: 'contact.html' }
+            // { id: 'contact', text: '聯絡我', link: 'contact.html' }
         ],
                 
                 // 個人資料
