@@ -1,0 +1,538 @@
+/* style.css - 特定頁面樣式 */
+
+/* ===== 首頁（關於我）樣式 ===== */
+
+/* 個人照片和問候語區域 */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.profile-frame {
+    flex: 1;
+    position: relative;
+    max-width: 350px;
+}
+
+.profile-frame::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+    border: 3px solid #ffafcc;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.profile-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center 30%; /* 控制照片位置，數值越大，照片越往下移 */
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 8px solid white;
+}
+
+.greeting {
+    flex: 1.5;
+}
+
+.greeting h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #a2738c;
+    margin-bottom: 0.5rem;
+}
+
+.greeting h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #6d5963;
+}
+
+.name {
+    color: #ff8fab;
+    font-weight: 600;
+}
+
+.emoji {
+    font-size: 1.5em;
+    animation: sparkle 1.5s infinite;
+    display: inline-block;
+}
+
+/* 社交媒體圖標 */
+.social-icons {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 2rem;
+}
+
+.social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff8fab, #ffafcc);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(255, 143, 171, 0.3);
+}
+
+.social-icon:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 15px rgba(255, 143, 171, 0.4);
+}
+
+/* 個人簡介卡片內容 */
+.bio-card h3 {
+    color: #ff8fab;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.bio-card h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #ff8fab, transparent);
+}
+
+.bio-text {
+    line-height: 1.8;
+    font-size: 18px;
+    margin-bottom: 2rem;
+    color: #6d5963;
+}
+
+/* 興趣和技能標籤 */
+.interests-section {
+    margin-top: 2rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.tag {
+    background-color: #ffc8dd;
+    color: #6d5963;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.tag:hover {
+    background-color: #ff8fab;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* 聯絡我按鈕區域 */
+.contact-me {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+
+/* ===== 作品集頁面樣式 ===== */
+
+/* 上傳表單樣式 */
+.upload-form {
+    margin-top: 1.5rem;
+}
+
+/* 文件上傳按鈕樣式 */
+.upload-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.file-input {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.upload-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, #ff8fab, #ffafcc);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(255, 143, 171, 0.3);
+}
+
+.upload-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 143, 171, 0.4);
+}
+
+.upload-button i {
+    margin-right: 0.5rem;
+}
+
+.file-name {
+    margin-left: 1rem;
+    color: #6d5963;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 作品集過濾器 */
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2.5rem 0;
+}
+
+.filter-btn {
+    background-color: white;
+    color: #6d5963;
+    border: 1px solid #ffc8dd;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: linear-gradient(45deg, #ff8fab, #ffafcc);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 143, 171, 0.3);
+}
+
+/* 作品集網格 */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.portfolio-item {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(255, 175, 204, 0.15);
+    transition: transform 0.3s;
+    background-color: white;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px);
+}
+
+.portfolio-image {
+    position: relative;
+    overflow: hidden;
+    height: 370px;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.portfolio-item:hover .portfolio-image img {
+    transform: scale(1.1);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 143, 171, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-overlay h3 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.project-category {
+    background-color: white;
+    color: #ff8fab;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.view-details {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.view-details:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 作品詳情模態窗口 */
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 2rem;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 15px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #6d5963;
+    cursor: pointer;
+    z-index: 10;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-image {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+}
+
+.modal-image img {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+}
+
+.modal-info {
+    padding: 2rem;
+}
+
+.modal-info h3 {
+    font-size: 1.8rem;
+    color: #6d5963;
+    margin-bottom: 0.5rem;
+}
+
+.modal-category {
+    display: inline-block;
+    background-color: #ffc8dd;
+    color: #6d5963;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+}
+
+.modal-info p {
+    color: #6d5963;
+    line-height: 1.8;
+}
+
+/* 管理者上傳頁面樣式 - 可以添加到 style.css 中 */
+
+/* 管理者認證區域 */
+.admin-notice {
+    text-align: center;
+    padding: 3rem;
+}
+
+.admin-notice p {
+    margin-bottom: 2rem;
+    color: #6d5963;
+}
+
+/* 已上傳作品管理列表 */
+.admin-projects {
+    margin-top: 2rem;
+}
+
+.project-list {
+    margin-top: 1.5rem;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(255, 175, 204, 0.15);
+    transition: transform 0.3s;
+}
+
+.project-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 175, 204, 0.25);
+}
+
+.project-preview {
+    width: 100px;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.project-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h4 {
+    font-size: 1.1rem;
+    color: #6d5963;
+    margin-bottom: 0.3rem;
+}
+
+.project-category-tag {
+    display: inline-block;
+    background-color: #ffc8dd;
+    color: #6d5963;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 50px;
+}
+
+.project-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+}
+
+.edit-btn {
+    background-color: #bde0fe;
+    color: #4a77a9;
+}
+
+.delete-btn {
+    background-color: #ffc8dd;
+    color: #b25e75;
+}
+
+.edit-btn:hover {
+    background-color: #93c5fd;
+    transform: scale(1.1);
+}
+
+.delete-btn:hover {
+    background-color: #ffafcc;
+    transform: scale(1.1);
+}
+
+.no-projects {
+    text-align: center;
+    padding: 2rem;
+    color: #a2738c;
+    font-style: italic;
+}
+
+/* 無內容提示 */
+.no-content {
+    text-align: center;
+    padding: 3rem;
+    color: #a2738c;
+    font-style: italic;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 175, 204, 0.2);
+    }

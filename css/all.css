@@ -1,0 +1,380 @@
+/* all.css - 全域通用樣式 */
+
+/* 基本樣式設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Arial', '獅尾牙膏圓體', sans-serif;
+}
+/* 設置 html 和 body 高度為 100% */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #fff5f7; /* 淺粉色背景 */
+    color: #6d5963;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+/* 設置 #app 為 flex 容器並佔滿視窗高度 */
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+/* 設置 main 內容區域佔用所有可用空間 */
+main.about-container {
+    flex: 1 0 auto; /* 自動擴展填充空間 */
+}
+/* 背景裝飾元素 */
+.background-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.circle1 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #ffb6c1, #ffc8dd);
+    top: -150px;
+    right: -100px;
+}
+
+.circle2 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, #ffc8dd, #ffb6c1);
+    bottom: -250px;
+    left: -200px;
+}
+
+.circle3 {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #ffdde1, #ffafcc);
+    top: 40%;
+    right: 15%;
+}
+
+.floating-shape {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+    animation: float 4s infinite ease-in-out;
+}
+
+.flower1 {
+    width: 80px;
+    height: 80px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10C40 30 10 40 30 50C10 60 40 70 50 90C60 70 90 60 70 50C90 40 60 30 50 10Z" fill="%23ffafcc"/></svg>');
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.flower2 {
+    width: 60px;
+    height: 60px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10C40 30 10 40 30 50C10 60 40 70 50 90C60 70 90 60 70 50C90 40 60 30 50 10Z" fill="%23ffc8dd"/></svg>');
+    top: 70%;
+    right: 15%;
+    animation-delay: 3s;
+}
+
+.leaf1 {
+    width: 70px;
+    height: 70px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20 50C20 20 80 20 80 50C80 80 20 80 20 50Z" fill="%23a2d2ff"/></svg>');
+    top: 40%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+.leaf2 {
+    width: 50px;
+    height: 50px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20 50C20 20 80 20 80 50C80 80 20 80 20 50Z" fill="%23bde0fe"/></svg>');
+    bottom: 20%;
+    right: 30%;
+    animation-delay: 4s;
+}
+
+/* 動畫效果 */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(0.8);
+    }
+}
+
+/* 通用容器和布局 */
+.about-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    position: relative;
+    background: transparent;
+}
+
+/* 頁頭和導航樣式 */
+header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.438rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 15px rgba(255, 175, 204, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+
+/* Logo 樣式 */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-svg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+    transform: scale(1.1);
+}
+
+/* 漢堡選單樣式 */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.bar {
+    height: 3px;
+    width: 100%;
+    background-color: #ff8fab;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.bar.animate:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.bar.animate:nth-child(2) {
+    opacity: 0;
+}
+
+.bar.animate:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* 導航樣式 */
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav li {
+    margin-left: 2rem;
+}
+
+nav a {
+    color: #a2738c;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff8fab;
+    transition: width 0.3s;
+}
+
+nav a:hover, nav a.active {
+    color: #ff8fab;
+}
+
+nav a:hover::after, nav a.active::after {
+    width: 100%;
+}
+/* 顯示下拉選單 */
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 下拉選單項目 */
+.dropdown-item {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-item a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    color: #a2738c;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.dropdown-item a:hover {
+    background-color: #fff5f7;
+    color: #ff8fab;
+}
+/* 頁尾區域 */
+footer {
+    flex-shrink: 0; /* 防止 footer 被壓縮 */
+    margin-top: 0; /* 移除之前的上外邊距 */
+    background-color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    color: #a2738c;
+    font-size: 0.9rem;
+    box-shadow: 0 -5px 20px rgba(255, 175, 204, 0.1);
+}
+
+/* 通用頁面標題 */
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-title h2 {
+    font-size: 2.2rem;
+    color: #6d5963;
+    margin-bottom: 0.5rem;
+}
+
+.page-title p {
+    color: #a2738c;
+    font-size: 1.2rem;
+}
+
+/* 通用卡片樣式 */
+.bio-card {
+    background-color: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(255, 175, 204, 0.2);
+    position: relative;
+    margin-top: 2rem;
+}
+
+/* 通用按鈕樣式 */
+.contact-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff8fab, #ffafcc);
+    color: white;
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 143, 171, 0.4);
+}
+
+.contact-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 143, 171, 0.5);
+}
+
+/* 通用表單元素 */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #6d5963;
+}
+
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ffc8dd;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #6d5963;
+    transition: all 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff8fab;
+    box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.2);
+}
+
+/* 通用表單按鈕 */
+.form-actions {
+    margin-top: 2rem;
+    text-align: center;
+}

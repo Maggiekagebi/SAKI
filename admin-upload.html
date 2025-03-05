@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>管理者上傳 - 個人網站</title>
+<!-- 引入外部CSS文件 -->
+<link rel="stylesheet" href="css/all.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/media.css" />
+<!-- 引入字體圖標 -->
+<link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+    crossorigin="anonymous" />
+<!-- 引入Google字體 -->
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+<!-- 引入Vue.js (官方CDN) -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<!-- Vue應用容器 -->
+<div id="app">
+    <!-- 背景元素 -->
+    <div class="background-elements">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+        <div class="floating-shape flower1"></div>
+        <div class="floating-shape flower2"></div>
+        <div class="floating-shape leaf1"></div>
+        <div class="floating-shape leaf2"></div>
+    </div>
+
+    <div class="header-container">
+        <!-- 頁頭導航區域 -->
+        <header>
+            <div class="logo">
+                <a href="index.html" title="回到首頁">
+                    <img src="images/Logo.svg" alt="Saki Logo" class="logo-svg" />
+                </a>
+            </div>
+
+            <!-- 漢堡選單按鈕 (僅在手機版顯示) -->
+            <div class="hamburger-menu" @click="toggleMenu">
+                <div class="bar" :class="{ 'animate': menuOpen }"></div>
+                <div class="bar" :class="{ 'animate': menuOpen }"></div>
+                <div class="bar" :class="{ 'animate': menuOpen }"></div>
+            </div>
+
+            <nav :class="{ 'mobile-open': menuOpen }">
+                <ul>
+                    <li v-for="item in navItems" :key="item.id" :class="{ 'has-dropdown': item.children }">
+                        <a 
+                            :href="item.link" 
+                            :class="{ active: currentPage === item.id }"
+                            @click="item.children ? (item.showDropdown = !item.showDropdown) : closeMenu()"
+                        >
+                            {{ item.text }}
+                            <i v-if="item.children" class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        
+                        <!-- 下拉選單 -->
+                        <ul v-if="item.children" class="dropdown-menu" :class="{ 'show': item.showDropdown }">
+                            <li v-for="child in item.children" :key="child.id">
+                                <a :href="child.link" :class="{ active: currentPage === child.id }" @click="closeMenu">
+                                    {{ child.text }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <main class="about-container">
+        <!-- 頁面標題 -->
+        <div class="page-title">
+            <h2>管理者上傳 <span class="emoji">🔒</span></h2>
+            <p>管理並上傳新作品到作品集</p>
+        </div>
+
+        <!-- 管理者認證提示 -->
+        <div class="admin-notice bio-card" v-if="!isAuthenticated">
+            <h3>管理者專區</h3>
+            <p>這是管理者專用頁面，請輸入管理密碼進行認證。</p>
+            
+            <div class="form-group">
+                <label for="admin-password">管理密碼</label>
+                <input type="password" id="admin-password" v-model="adminPassword" placeholder="請輸入管理密碼" />
+            </div>
+            
+            <div class="form-actions">
+                <button class="contact-button" @click="authenticate">登入</button>
+            </div>
+        </div>
+
+        <!-- 作品上傳表單 (僅在通過認證後顯示) -->
+        <div class="bio-card" v-if="isAuthenticated">
+            <h3>上傳新作品</h3>
+            <div class="upload-form">
+                <div class="form-group">
+                    <label for="project-title">作品標題</label>
+                    <input
+                        type="text"
+                        id="project-title"
+                        v-model="newProject.title"
+                        placeholder="請輸入作品名稱" />
+                </div>
+
+                <div class="form-group">
+                    <label for="project-category">作品分類</label>
+                    <select id="project-category" v-model="newProject.category">
+                        <option value="">請選擇分類</option>
+                        <option value="平面設計">平面設計</option>
+                        <option value="網頁設計">網頁設計</option>
+                        <option value="品牌設計">品牌設計</option>
+                        <option value="插畫">插畫</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-description">作品描述</label>
+                    <textarea
+                        id="project-description"
+                        v-model="newProject.description"
+                        placeholder="請描述這個作品"
+                        rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-image">作品圖片</label>
+                    <div class="upload-container">
+                        <input
+                            type="file"
+                            id="project-image"
+                            @change="handleFileUpload"
+                            accept="image/*"
+                            class="file-input" />
+                        <div class="upload-button">
+                            <i class="fas fa-cloud-upload-alt"></i> 選擇圖片
+                        </div>
+                        <span class="file-name" v-if="newProject.imageFile"
+                            >{{ newProject.imageFile.name }}</span
+                        >
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="contact-button" @click="uploadProject">上傳作品</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 已上傳作品列表 (僅在通過認證後顯示) -->
+        <div class="bio-card admin-projects" v-if="isAuthenticated">
+            <h3>已上傳作品管理</h3>
+            
+            <div class="project-list" v-if="projects.length > 0">
+                <div class="project-item" v-for="project in projects" :key="project.id">
+                    <div class="project-preview">
+                        <img :src="project.image" :alt="project.title" />
+                    </div>
+                    <div class="project-info">
+                        <h4>{{ project.title }}</h4>
+                        <p class="project-category-tag">{{ project.category }}</p>
+                    </div>
+                    <div class="project-actions">
+                        <button class="edit-btn" @click="editProject(project)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn" @click="deleteProject(project.id)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="no-projects" v-else>
+                <p>目前還沒有上傳任何作品。</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾區域 -->
+    <footer>
+        <p>
+            &copy; {{ new Date().getFullYear() }} {{ personalInfo.name }}.
+            保留所有權利。
+        </p>
+    </footer>
+</div>
+
+<!-- 引入外部JavaScript文件 -->
+<script src="js/admin-upload.js"></script>
+</body>
+</html>

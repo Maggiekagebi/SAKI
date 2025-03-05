@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>作品集 - 個人網站</title>
+<!-- 引入外部CSS文件 -->
+<link rel="stylesheet" href="css/all.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/media.css" />
+<!-- 引入字體圖標 -->
+<link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+    crossorigin="anonymous" />
+<!-- 引入Google字體 -->
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+<!-- 引入Vue.js (官方CDN) -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<!-- Vue應用容器 -->
+<div id="app">
+    <!-- 背景元素 -->
+    <div class="background-elements">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+        <div class="floating-shape flower1"></div>
+        <div class="floating-shape flower2"></div>
+        <div class="floating-shape leaf1"></div>
+        <div class="floating-shape leaf2"></div>
+    </div>
+
+    <div class="header-container">
+        <!-- 頁頭導航區域 -->
+        <header>
+            <div class="logo">
+                <a href="index.html" title="回到首頁">
+                    <img src="images/Logo.svg" alt="Saki Logo" class="logo-svg" />
+                </a>
+            </div>
+
+            <!-- 漢堡選單按鈕 (僅在手機版顯示) -->
+            <div class="hamburger-menu" @click="toggleMenu">
+                <div class="bar" :class="{ 'animate': menuOpen }"></div>
+                <div class="bar" :class="{ 'animate': menuOpen }"></div>
+                <div class="bar" :class="{ 'animate': menuOpen }"></div>
+            </div>
+
+            <nav :class="{ 'mobile-open': menuOpen }">
+                <ul>
+                    <li v-for="item in navItems" :key="item.id" :class="{ 'has-dropdown': item.children }">
+                        <a 
+                            :href="item.link" 
+                            :class="{ active: currentPage === item.id }"
+                            @click="item.children ? (item.showDropdown = !item.showDropdown) : closeMenu()"
+                        >
+                            {{ item.text }}
+                            <i v-if="item.children" class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        
+                        <!-- 下拉選單 -->
+                        <ul v-if="item.children" class="dropdown-menu" :class="{ 'show': item.showDropdown }">
+                            <li v-for="child in item.children" :key="child.id">
+                                <a :href="child.link" :class="{ active: currentPage === child.id }" @click="closeMenu">
+                                    {{ child.text }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <main class="about-container">
+        <!-- 頁面標題 -->
+        <div class="page-title">
+            <h2>作品集 <span class="emoji">✨</span></h2>
+            <p>探索我的創作與設計作品</p>
+        </div>
+
+        <!-- 作品集過濾器 -->
+        <div class="portfolio-filters">
+            <button
+                class="filter-btn"
+                :class="{ active: activeFilter === 'all' }"
+                @click="filterProjects('all')">
+                全部作品
+            </button>
+            <button
+                v-for="category in uniqueCategories"
+                :key="category"
+                class="filter-btn"
+                :class="{ active: activeFilter === category }"
+                @click="filterProjects(category)">
+                {{ category }}
+            </button>
+        </div>
+
+        <!-- 作品集網格 -->
+        <div class="portfolio-grid">
+            <div
+                v-for="project in filteredProjects"
+                :key="project.id"
+                class="portfolio-item">
+                <div class="portfolio-image">
+                    <img :src="project.image" :alt="project.title" />
+                    <div class="portfolio-overlay">
+                        <div class="project-category">{{ project.category }}</div>
+                        <h3>{{ project.title }}</h3>
+                        <a
+                            href="#"
+                            class="view-details"
+                            @click.prevent="viewProjectDetails(project)"
+                            >查看詳情</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 無作品提示 -->
+        <div class="no-content" v-if="projects.length === 0">
+            <p>目前還沒有任何作品。</p>
+        </div>
+
+        <!-- 作品詳情彈窗 -->
+        <div class="project-modal" v-if="showModal" @click="closeModal">
+            <div class="modal-content" @click.stop>
+                <span class="close-modal" @click="closeModal">&times;</span>
+                <div class="modal-image">
+                    <img :src="selectedProject.image" :alt="selectedProject.title" />
+                </div>
+                <div class="modal-info">
+                    <h3>{{ selectedProject.title }}</h3>
+                    <div class="modal-category">{{ selectedProject.category }}</div>
+                    <!-- 設置white-space: pre-wrap;就可以在js中\n換行 -->
+                    <span style="white-space: pre-wrap;"><p>{{ selectedProject.description }}</p></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 頁尾區域 -->
+    <footer>
+        <p>
+            &copy; {{ new Date().getFullYear() }} {{ personalInfo.name }}.
+            保留所有權利。
+        </p>
+    </footer>
+</div>
+
+<!-- 引入外部JavaScript文件 -->
+<script src="js/portfolio.js"></script>
+</body>
+</html>
