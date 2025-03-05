@@ -10,20 +10,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 導航菜單是否打開
                 menuOpen: false,
-                
+
+                // 當前活動的下拉選單
+        activeDropdown: null,
+        
                 // 個人資料
                 personalInfo: {
-                    name: '您的名字',
+                    name: '咲 (SAKI)',
                     logoText: 'Saki'
                 },
                 
-                // 導航項目
-                navItems: [
-                    { id: 'about', text: '關於我', link: 'index.html' },
-                    { id: 'portfolio', text: '作品集', link: 'portfolio.html' },
-                    { id: 'blog', text: '部落格', link: '#' },
-                    { id: 'contact', text: '聯絡我', link: 'contact.html' }
-                ],
+                 // 導航項目
+        navItems: [
+            { id: 'about', text: '關於我', link: 'index.html' },
+            { id: 'portfolio', text: '作品集', link: 'portfolio.html' },
+            { 
+                id: 'blog', 
+                text: '部落格', 
+                link: 'blog.html',
+                dropdown: true,
+                dropdownItems: [
+                    { id: 'food', text: '美食', link: 'blog-food.html' },
+                    { id: 'travel', text: '旅遊', link: 'blog-travel.html' },
+                    { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
+                ]
+            },
+            { id: 'contact', text: '聯絡我', link: 'contact.html' }
+        ],
                 
                 // 作品集
                 projects: [],

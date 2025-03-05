@@ -37,20 +37,20 @@ data() {
                     name: '咲 (SAKI)',
                     greeting: '哈囉！',
                     photo: 'images/myphoto.jpg', // 您可以替換為您的照片
-                    bio: `我是一位充滿熱情的設計師與內容創作者，喜歡在旅行中尋找靈感，將生活中的美好轉化為創意作品。<br><br>
+                    bio: `我是一位努力精進自己的前端開發者，專注於打造兼具美觀與實用性的網站體驗。<br>在技術方面，我使用HTML、CSS和Bootstrap等前端技術，擅用Vue.js增強網站互動性。<br><br>
                     
-                    擁有多年的設計經驗，專注於品牌識別、用戶體驗設計和視覺傳達。我相信優秀的設計不僅能解決問題，更能觸動人心，創造情感連結。<br><br>
+                    閒暇時光，我喜歡追劇放鬆自己，特別鍾愛動漫，沉浸在精彩的故事情節中。<br>同時，我也意識到自己在程式語言方面還有進步空間，因此會利用空閒時間自學，不斷精進技術能力，讓自己在網頁開發領域更加專業。<br><br>
+
+                    我相信優秀的數位產品不僅需要紮實的技術基礎，更需要對使用者需求的深刻理解，這也是我持續努力的方向。`,
                     
-                    當我不在工作時，你可能會發現我在咖啡廳角落閱讀一本好書，或是在城市的小巷中尋找拍照的完美角度。我熱愛分享我的知識和經驗，希望能夠啟發更多人發現生活中的美好和可能性。`,
-                    
-                    interests: ['前端工程師', '攝影愛好','旅行探索', '咖啡文化', '漫畫動漫', '瑜珈冥想','時尚穿搭']
+                    interests: ['前端工程師', 'HTML','CSS','Bootstrap','RWD','Vue.js','攝影愛好','旅行探索', '咖啡文化', '漫畫動漫', '瑜珈冥想','時尚穿搭']
                 },
                 
                 // 社交媒體連結
                 socialLinks: [
                     { name: 'Instagram', url: '#', icon: 'fab fa-instagram' },
                     { name: 'github', url: '#', icon: 'fab fa fa-github' },
-                    { name: 'HackMD', url: '#', icon: 'fa fa-book' },
+                    { name: 'HackMD', url: 'https://hackmd.io/@Maggie-Hsieh', icon: 'fa fa-book' },
                 ]
             }
         },
@@ -90,23 +90,64 @@ data() {
                 }, 100);
             },
             
-            // 切換菜單顯示/隱藏
-            toggleMenu() {
-                this.menuOpen = !this.menuOpen;
-                
-                // 當菜單打開時，禁止背景滾動
-                if (this.menuOpen) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
-            },
-            
-            // 關閉菜單
-            closeMenu() {
-                this.menuOpen = false;
-                document.body.style.overflow = '';
-            }
+// 修改或添加方法
+methods: {
+    // 切換菜單顯示/隱藏
+    toggleMenu() {
+        this.menuOpen = !this.menuOpen;
+        
+        // 當菜單打開時，禁止背景滾動
+        if (this.menuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+            // 關閉所有下拉菜單
+            this.activeDropdown = null;
+        }
+    },
+    
+    // 關閉菜單
+    closeMenu() {
+        this.menuOpen = false;
+        document.body.style.overflow = '';
+        // 關閉所有下拉菜單
+        this.activeDropdown = null;
+    },
+    
+    // 切換下拉選單
+    toggleDropdown(event, itemId) {
+        // 阻止導航到錨點
+        event.preventDefault();
+        
+        // 在移動設備上
+        if (window.innerWidth < 768) {
+            // 如果點擊的是當前打開的下拉菜單，則關閉它
+            this.activeDropdown = this.activeDropdown === itemId ? null : itemId;
+        } else {
+            // 在桌面設備上，點擊導航到博客主頁
+            window.location.href = this.navItems.find(item => item.id === itemId).link;
+        }
+    },
+    
+    // 處理點擊文檔關閉下拉選單
+    handleClickOutside(event) {
+        const dropdownContainer = document.querySelector('.has-dropdown');
+        if (dropdownContainer && !dropdownContainer.contains(event.target) && this.activeDropdown) {
+            this.activeDropdown = null;
+        }
+    }
+},
+
+// 添加生命週期鉤子
+mounted() {
+    // 添加點擊文檔關閉下拉選單的事件監聽器
+    document.addEventListener('click', this.handleClickOutside);
+},
+
+beforeUnmount() {
+    // 移除事件監聽器
+    document.removeEventListener('click', this.handleClickOutside);
+}
         }
     });
     

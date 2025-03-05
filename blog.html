@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>部落格 - 個人網站</title>
+		<!-- 引入外部CSS文件 -->
+		<link rel="stylesheet" href="css/all.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/media.css" />
+		<!-- 引入字體圖標 -->
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+			integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+			crossorigin="anonymous" />
+		<!-- 引入Google字體 -->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+		<!-- 引入Vue.js (官方CDN) -->
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	</head>
+	<body>
+		<!-- Vue應用容器 -->
+		<div id="app">
+			<!-- 背景元素 -->
+			<div class="background-elements">
+				<div class="circle circle1"></div>
+				<div class="circle circle2"></div>
+				<div class="circle circle3"></div>
+				<div class="floating-shape flower1"></div>
+				<div class="floating-shape flower2"></div>
+				<div class="floating-shape leaf1"></div>
+				<div class="floating-shape leaf2"></div>
+			</div>
+
+			<div class="header-container">
+				<!-- 頁頭導航區域 -->
+				<header>
+					<div class="logo">
+						<a href="index.html" title="回到首頁">
+							<img src="images/Logo.svg" alt="Saki Logo" class="logo-svg" />
+						</a>
+					</div>
+
+					<!-- 漢堡選單按鈕 (僅在手機版顯示) -->
+					<div class="hamburger-menu" @click="toggleMenu">
+						<div class="bar" :class="{ 'animate': menuOpen }"></div>
+						<div class="bar" :class="{ 'animate': menuOpen }"></div>
+						<div class="bar" :class="{ 'animate': menuOpen }"></div>
+					</div>
+
+					<nav :class="{ 'mobile-open': menuOpen }">
+						<ul>
+							<li
+								v-for="item in navItems"
+								:key="item.id"
+								class="nav-item"
+								:class="{ 'has-dropdown': item.dropdown }">
+								<a
+									:href="item.link"
+									:class="{ active: currentPage === item.id }"
+									@click="item.dropdown ? toggleDropdown($event, item.id) : closeMenu()">
+									{{ item.text }}
+									<i v-if="item.dropdown" class="fas fa-chevron-down dropdown-icon"></i>
+								</a>
+
+								<!-- 下拉式選單 -->
+								<ul
+									v-if="item.dropdown"
+									class="dropdown-menu"
+									:class="{ 'show': activeDropdown === item.id }">
+									<li
+										v-for="subItem in item.dropdownItems"
+										:key="subItem.id"
+										class="dropdown-item">
+										<a :href="subItem.link" @click="closeMenu">{{ subItem.text }}</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</header>
+			</div>
+
+			<!-- 主要內容區域 -->
+			<main class="about-container">
+				<!-- 頁面標題 -->
+				<div class="page-title">
+					<h2>部落格 <span class="emoji">✏️</span></h2>
+					<p>分享我的想法、經驗與創意</p>
+				</div>
+
+				<!-- 最新文章部分 -->
+				<div class="latest-posts">
+					<h3 class="section-title">最新發布</h3>
+
+					<div class="posts-grid">
+						<div class="post-card" v-for="post in latestPosts" :key="post.id">
+							<div class="post-image">
+								<img :src="post.image" :alt="post.title" />
+								<div
+									class="post-category-label"
+									:style="{ backgroundColor: getCategoryColor(post.category) }">
+									{{ post.category }}
+								</div>
+							</div>
+							<div class="post-content">
+								<div class="post-meta">
+									<span class="post-date"
+										><i class="far fa-calendar-alt"></i> {{ post.date }}</span
+									>
+									<span class="post-read-time"
+										><i class="far fa-clock"></i> {{ post.readTime }}</span
+									>
+								</div>
+								<h4 class="post-title">{{ post.title }}</h4>
+								<p class="post-excerpt">{{ post.excerpt }}</p>
+								<a :href="post.link" class="read-more">閱讀全文</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+
+			<!-- 頁尾區域 -->
+			<footer>
+				<p>
+					&copy; {{ new Date().getFullYear() }} {{ personalInfo.name }}.
+					保留所有權利。
+				</p>
+			</footer>
+		</div>
+
+		<!-- 引入外部JavaScript文件 -->
+		<script src="js/blog.js"></script>
+	</body>
+</html>

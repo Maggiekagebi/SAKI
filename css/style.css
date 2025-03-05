@@ -536,3 +536,113 @@
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(255, 175, 204, 0.2);
     }
+
+
+/* 部落格頁面樣式 - 添加到 style.css */
+/* 最新文章部分 */
+.latest-posts {
+    margin-top: 4rem;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #6d5963;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #ff8fab, transparent);
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.post-card {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(255, 175, 204, 0.15);
+    transition: transform 0.3s;
+}
+
+.post-card:hover {
+    transform: translateY(-8px);
+}
+
+.post-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.post-card:hover .post-image img {
+    transform: scale(1.1);
+}
+
+.post-category-label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: #ff8fab;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+}
+
+.post-content {
+    padding: 1.5rem;
+}
+
+.post-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #a2738c;
+    margin-bottom: 1rem;
+}
+
+.post-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #6d5963;
+    line-height: 1.4;
+}
+
+.post-excerpt {
+    color: #a2738c;
+    margin-bottom: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.read-more {
+    color: #ff8fab;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.read-more:hover {
+    color: #ff618a;
+}
