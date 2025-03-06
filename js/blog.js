@@ -128,16 +128,28 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 切換下拉選單
             toggleDropdown(event, itemId) {
-                // 阻止導航到錨點
-                event.preventDefault();
+                // 找到相應的導航項
+                const navItem = this.navItems.find(item => item.id === itemId);
                 
-                // 在移動設備上
-                if (window.innerWidth < 768) {
-                    // 如果點擊的是當前打開的下拉菜單，則關閉它
-                    this.activeDropdown = this.activeDropdown === itemId ? null : itemId;
+                // 檢查是否點擊的是下拉圖標
+                const isDropdownIcon = event.target.classList.contains('dropdown-icon') || 
+                                      event.target.parentElement.classList.contains('dropdown-icon');
+                
+                // 僅在點擊下拉圖標時才阻止默認行為
+                if (isDropdownIcon) {
+                    event.preventDefault();
+                    
+                    // 如果是同一個選單，則切換顯示/隱藏
+                    if (this.activeDropdown === itemId) {
+                        this.activeDropdown = null;
+                    } else {
+                        this.activeDropdown = itemId;
+                    }
                 } else {
-                    // 在桌面設備上，點擊導航到博客主頁
-                    window.location.href = this.navItems.find(item => item.id === itemId).link;
+                    // 如果不是點擊下拉圖標，則正常導航到頁面
+                    if (navItem && navItem.link) {
+                        window.location.href = navItem.link;
+                    }
                 }
             },
             

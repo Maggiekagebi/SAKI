@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 menuOpen: false,
 
                 // 當前活動的下拉選單
-        activeDropdown: null,
+                activeDropdown: null,
 
                 // 個人資料
                 personalInfo: {
@@ -20,23 +20,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     logoText: 'Saki'
                 },
                 
-                 // 導航項目
-        navItems: [
-            { id: 'about', text: '關於我', link: 'index.html' },
-            { id: 'portfolio', text: '作品集', link: 'portfolio.html' },
-            { 
-                id: 'blog', 
-                text: '部落格', 
-                link: 'blog.html',
-                dropdown: true,
-                dropdownItems: [
-                    { id: 'food', text: '美食', link: 'blog-food.html' },
-                    { id: 'travel', text: '旅遊', link: 'blog-travel.html' },
-                    { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
-                ]
-            },
-            // { id: 'contact', text: '聯絡我', link: 'contact.html' }
-        ],
+                // 導航項目
+                navItems: [
+                    { id: 'about', text: '關於我', link: 'index.html' },
+                    { id: 'portfolio', text: '作品集', link: 'portfolio.html' },
+                    { 
+                        id: 'blog', 
+                        text: '部落格', 
+                        link: 'blog.html',
+                        dropdown: true,
+                        dropdownItems: [
+                            { id: 'food', text: '美食', link: 'blog-food.html' },
+                            { id: 'travel', text: '旅遊', link: 'blog-travel.html' },
+                            { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
+                        ]
+                    },
+                    // { id: 'contact', text: '聯絡我', link: 'contact.html' }
+                ],
                 
                 // 作品集
                 projects: [],
@@ -78,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.body.style.overflow = 'hidden';
                 } else {
                     document.body.style.overflow = '';
+                    // 關閉所有下拉菜單
+                    this.activeDropdown = null;
                 }
             },
             
@@ -85,6 +87,35 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMenu() {
                 this.menuOpen = false;
                 document.body.style.overflow = '';
+                // 關閉所有下拉菜單
+                this.activeDropdown = null;
+            },
+            
+            // 切換下拉選單
+            toggleDropdown(event, itemId) {
+                // 找到相應的導航項
+                const navItem = this.navItems.find(item => item.id === itemId);
+                
+                // 檢查是否點擊的是下拉圖標
+                const isDropdownIcon = event.target.classList.contains('dropdown-icon') || 
+                                      event.target.parentElement.classList.contains('dropdown-icon');
+                
+                // 僅在點擊下拉圖標時才阻止默認行為
+                if (isDropdownIcon) {
+                    event.preventDefault();
+                    
+                    // 如果是同一個選單，則切換顯示/隱藏
+                    if (this.activeDropdown === itemId) {
+                        this.activeDropdown = null;
+                    } else {
+                        this.activeDropdown = itemId;
+                    }
+                } else {
+                    // 如果不是點擊下拉圖標，則正常導航到頁面
+                    if (navItem && navItem.link) {
+                        window.location.href = navItem.link;
+                    }
+                }
             },
             
             // 載入作品數據
@@ -167,6 +198,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // 恢復背景滾動
                 document.body.style.overflow = '';
+            },
+            
+            // 處理點擊文檔關閉下拉選單
+            handleClickOutside(event) {
+                const dropdownContainer = document.querySelector('.has-dropdown');
+                if (dropdownContainer && !dropdownContainer.contains(event.target) && this.activeDropdown) {
+                    this.activeDropdown = null;
+                }
             }
         },
         
@@ -174,6 +213,14 @@ document.addEventListener('DOMContentLoaded', function() {
         mounted() {
             // 在頁面載入時，加載作品數據
             this.loadProjects();
+            
+            // 添加點擊文檔關閉下拉選單的事件監聽器
+            document.addEventListener('click', this.handleClickOutside);
+        },
+        
+        beforeUnmount() {
+            // 移除事件監聽器
+            document.removeEventListener('click', this.handleClickOutside);
         }
     });
     

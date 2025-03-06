@@ -2,35 +2,38 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 創建Vue應用
     const app = Vue.createApp({
-        // 修改 data 函數，添加下拉式選單相關數據
-data() {
-    return {
-        // 當前頁面
-        currentPage: 'home', // 根據實際頁面修改
-        
-        // 導航菜單是否打開
-        menuOpen: false,
-        
-        // 當前活動的下拉選單
-        activeDropdown: null,
-        
-        // 導航項目
-        navItems: [
-            { id: 'about', text: '關於我', link: 'index.html' },
-            { id: 'portfolio', text: '作品集', link: 'portfolio.html' },
-            { 
-                id: 'blog', 
-                text: '部落格', 
-                link: 'blog.html',
-                dropdown: true,
-                dropdownItems: [
-                    { id: 'food', text: '美食', link: 'blog-food.html' },
-                    { id: 'travel', text: '旅遊', link: 'blog-travel.html' },
-                    { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
-                ]
-            },
-            // { id: 'contact', text: '聯絡我', link: 'contact.html' }
-        ],
+        // 數據 - 存儲應用中使用的所有變量
+        data() {
+            return {
+                // 當前頁面
+                currentPage: 'about', // 根據實際頁面修改
+                
+                // 導航菜單是否打開
+                menuOpen: false,
+                
+                // 當前活動的下拉選單
+                activeDropdown: null,
+                
+                // 控制下拉選單的顯示狀態
+                dropdownVisible: false,
+                
+                // 導航項目
+                navItems: [
+                    { id: 'about', text: '關於我', link: 'index.html' },
+                    { id: 'portfolio', text: '作品集', link: 'portfolio.html' },
+                    { 
+                        id: 'blog', 
+                        text: '部落格', 
+                        link: 'blog.html',
+                        dropdown: true,
+                        dropdownItems: [
+                            { id: 'food', text: '美食', link: 'blog-food.html' },
+                            { id: 'travel', text: '旅遊', link: 'blog-travel.html' },
+                            { id: 'notes', text: '學習筆記', link: 'blog-notes.html' }
+                        ]
+                    },
+                    // { id: 'contact', text: '聯絡我', link: 'contact.html' }
+                ],
                 
                 // 個人資料
                 personalInfo: {
@@ -60,20 +63,8 @@ data() {
             // 切換頁面的函數
             changePage(pageId) {
                 this.currentPage = pageId;
-            }
-        },
-        
-        // 在Vue應用掛載完成後執行
-        mounted() {
-            // 添加頁面載入動畫
-            document.body.classList.add('loaded');
+            },
             
-            // 為標籤添加隨機色調變化（但保持在粉色系列）
-            this.applyTagColors();
-        },
-        
-        // 方法
-        methods: {
             // 為標籤添加隨機的粉色系顏色
             applyTagColors() {
                 setTimeout(() => {
@@ -90,64 +81,84 @@ data() {
                 }, 100);
             },
             
-// 修改或添加方法
-methods: {
-    // 切換菜單顯示/隱藏
-    toggleMenu() {
-        this.menuOpen = !this.menuOpen;
+            // 切換菜單顯示/隱藏
+            toggleMenu() {
+                this.menuOpen = !this.menuOpen;
+                
+                // 當菜單打開時，禁止背景滾動
+                if (this.menuOpen) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                    // 關閉所有下拉菜單
+                    this.activeDropdown = null;
+                    this.dropdownVisible = false;
+                }
+            },
+            
+            // 關閉菜單
+            closeMenu() {
+                this.menuOpen = false;
+                document.body.style.overflow = '';
+                // 關閉所有下拉菜單
+                this.activeDropdown = null;
+                this.dropdownVisible = false;
+            },
+            
+            // 切換下拉選單
+            toggleDropdown(event, itemId) {
+                // 找到相應的導航項
+                const navItem = this.navItems.find(item => item.id === itemId);
+                
+                // 檢查是否點擊的是下拉圖標
+                const isDropdownIcon = event.target.classList.contains('dropdown-icon') || 
+                                       event.target.parentElement.classList.contains('dropdown-icon');
+                
+                // 僅在點擊下拉圖標時才阻止默認行為
+                if (isDropdownIcon) {
+                    event.preventDefault();
+                    
+                    // 如果是同一個選單，則切換顯示/隱藏
+                    if (this.activeDropdown === itemId) {
+                        this.activeDropdown = null;
+                        this.dropdownVisible = false;
+                    } else {
+                        this.activeDropdown = itemId;
+                        this.dropdownVisible = true;
+                    }
+                } else {
+                    // 如果不是點擊下拉圖標，則正常導航到頁面
+                    if (navItem && navItem.link) {
+                        window.location.href = navItem.link;
+                    }
+                }
+            },
+            
+            // 處理點擊文檔關閉下拉選單
+            handleClickOutside(event) {
+                const dropdownContainer = document.querySelector('.has-dropdown');
+                if (dropdownContainer && !dropdownContainer.contains(event.target) && this.activeDropdown) {
+                    this.activeDropdown = null;
+                    this.dropdownVisible = false;
+                }
+            }
+        },
         
-        // 當菜單打開時，禁止背景滾動
-        if (this.menuOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-            // 關閉所有下拉菜單
-            this.activeDropdown = null;
-        }
-    },
-    
-    // 關閉菜單
-    closeMenu() {
-        this.menuOpen = false;
-        document.body.style.overflow = '';
-        // 關閉所有下拉菜單
-        this.activeDropdown = null;
-    },
-    
-    // 切換下拉選單
-    toggleDropdown(event, itemId) {
-        // 阻止導航到錨點
-        event.preventDefault();
+        // 在Vue應用掛載完成後執行
+        mounted() {
+            // 添加頁面載入動畫
+            document.body.classList.add('loaded');
+            
+            // 為標籤添加隨機色調變化（但保持在粉色系列）
+            this.applyTagColors();
+            
+            // 添加點擊文檔關閉下拉選單的事件監聽器
+            document.addEventListener('click', this.handleClickOutside);
+        },
         
-        // 在移動設備上
-        if (window.innerWidth < 768) {
-            // 如果點擊的是當前打開的下拉菜單，則關閉它
-            this.activeDropdown = this.activeDropdown === itemId ? null : itemId;
-        } else {
-            // 在桌面設備上，點擊導航到博客主頁
-            window.location.href = this.navItems.find(item => item.id === itemId).link;
-        }
-    },
-    
-    // 處理點擊文檔關閉下拉選單
-    handleClickOutside(event) {
-        const dropdownContainer = document.querySelector('.has-dropdown');
-        if (dropdownContainer && !dropdownContainer.contains(event.target) && this.activeDropdown) {
-            this.activeDropdown = null;
-        }
-    }
-},
-
-// 添加生命週期鉤子
-mounted() {
-    // 添加點擊文檔關閉下拉選單的事件監聽器
-    document.addEventListener('click', this.handleClickOutside);
-},
-
-beforeUnmount() {
-    // 移除事件監聽器
-    document.removeEventListener('click', this.handleClickOutside);
-}
+        beforeUnmount() {
+            // 移除事件監聽器
+            document.removeEventListener('click', this.handleClickOutside);
         }
     });
     

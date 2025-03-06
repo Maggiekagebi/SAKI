@@ -1,104 +1,108 @@
-/* 媒體查詢 CSS - 使用統一的 Bootstrap 斷點 */
+/* responsive.css - 響應式樣式設定 */
 
-/* 共用動畫定義 */
+/* ========== 共用定義 ========== */
+
+/* 動畫定義 */
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* iOS 特別處理 */
 @supports (-webkit-touch-callout: none) {
-	html,
-	body {
-		height: -webkit-fill-available;
-	}
+    html,
+    body {
+        height: -webkit-fill-available;
+    }
 
-	#app {
-		min-height: -webkit-fill-available;
-	}
+    #app {
+        min-height: -webkit-fill-available;
+    }
 }
 
-/* 小型設備 (手機, <768px) */
+/* ========== 小型設備 (手機, <768px) ========== */
 @media (max-width: 767.98px) {
-	/* 全局布局設定 */
-	html,
-	body {
-		height: 100%;
-	}
+    /* 全局布局設定 */
+    html,
+    body {
+        height: 100%;
+    }
 
-	#app {
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-	}
+    #app {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
 
-	main,
-	.about-container,
-	.content-container {
-		flex: 1;
-	}
+    main,
+    .about-container,
+    .content-container {
+        flex: 1;
+    }
 
-	footer {
-		margin-top: auto;
-		padding: 1rem 0;
-		font-size: 0.9rem;
-	}
+    footer {
+        margin-top: auto;
+        padding: 1rem 0;
+        font-size: 0.9rem;
+    }
 
-	/* 導航樣式 */
-	.hamburger-menu {
-		display: flex;
-	}
+    /* 導航樣式 */
+    .hamburger-menu {
+        display: flex;
+    }
 
-	header {
-		padding: 1rem 5%;
-	}
+    header {
+        padding: 1rem 5%;
+    }
 
-	.logo-svg {
-		width: 50px;
-		height: 50px;
-	}
+    .logo-svg {
+        width: 50px;
+        height: 50px;
+    }
 
-	nav {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100vh;
-		background-color: rgba(255, 255, 255, 0.95);
-		display: none;
-		justify-content: center;
-		align-items: center;
-		z-index: 5;
-	}
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.95);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+    }
 
-	nav.mobile-open {
-		display: flex;
-		animation: fadeIn 0.3s ease;
-	}
+    nav.mobile-open {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+    }
 
-	nav ul {
-		flex-direction: column;
-		align-items: center;
-		padding: 0;
-		width: 100%;
-	}
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        width: 100%;
+    }
 
-	nav li {
-		margin: 1.5rem 0;
-		width: 100%;
-		text-align: center;
-	}
+    nav li {
+        margin: 1.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
 
-	nav a {
-		display: block;
-		padding: 0.8rem 0;
-		font-size: 1.2rem;
-	}
-	.dropdown-menu {
+    nav a {
+        display: block;
+        padding: 0.8rem 0;
+        font-size: 1.2rem;
+    }
+    
+    /* 下拉選單手機版 */
+    .dropdown-menu {
         position: static;
         box-shadow: none;
         background: transparent;
@@ -109,6 +113,7 @@
         opacity: 1;
         visibility: visible;
         transform: none;
+		border: none;
     }
     
     .dropdown-menu.show {
@@ -123,160 +128,162 @@
     
     .dropdown-item a:hover {
         background-color: transparent;
+        color: #ff8fab;
     }
-	/* 內容區域樣式 */
-	main.about-container {
-		margin: 2rem auto;
-		padding: 0 1.5rem;
-	}
+    
+    /* 內容區域樣式 */
+    main.about-container {
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
 
-	.profile-section {
-		flex-direction: column;
-		text-align: center;
-	}
+    .profile-section {
+        flex-direction: column;
+        text-align: center;
+    }
 
-	.profile-frame {
-		margin: 0 auto;
-		max-width: 250px;
-	}
+    .profile-frame {
+        margin: 0 auto;
+        max-width: 250px;
+    }
 
-	.profile-image {
-		width: 100%;
-	}
+    .profile-image {
+        width: 100%;
+    }
 
-	.greeting h1 {
-		font-size: 2rem;
-	}
+    .greeting h1 {
+        font-size: 2rem;
+    }
 
-	.greeting h2 {
-		font-size: 1.5rem;
-	}
+    .greeting h2 {
+        font-size: 1.5rem;
+    }
 
-	.social-icons {
-		justify-content: center;
-	}
+    .social-icons {
+        justify-content: center;
+    }
 
-	.bio-card {
-		padding: 1.5rem;
-	}
+    .bio-card {
+        padding: 1.5rem;
+    }
 
-	.tag {
-		font-size: 0.9rem;
-		padding: 0.4rem 2rem;
-	}
+    .tag {
+        font-size: 0.9rem;
+        padding: 0.4rem 2rem;
+    }
 
-	/* 作品集網格 - 手機單欄 */
-	.portfolio-grid {
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-	}
+    /* 作品集網格 - 手機單欄 */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
 
-	.portfolio-image {
-		height: 220px;
-	}
+    .portfolio-image {
+        height: 220px;
+    }
 
-	/* 模態窗口樣式 - 手機版為上下結構 */
-	.modal-content {
-		flex-direction: column;
-	}
+    /* 模態窗口樣式 - 手機版為上下結構 */
+    .modal-content {
+        flex-direction: column;
+    }
 
-	.modal-image {
-		width: 100%;
-		border-radius: 15px 15px 0 0;
-	}
+    .modal-image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+    }
 
-	.modal-info {
-		width: 100%;
-	}
+    .modal-info {
+        width: 100%;
+    }
 }
 
-/* 中等設備 (平板, ≥768px and <992px) */
+/* ========== 中等設備 (平板, ≥768px and <992px) ========== */
 @media (min-width: 768px) and (max-width: 991.98px) {
-	/* 布局設定 */
-	#app {
-		min-height: 100vh;
-	}
+    /* 布局設定 */
+    #app {
+        min-height: 100vh;
+    }
 
-	footer {
-		margin-top: auto;
-		padding: 1.2rem 0;
-	}
+    footer {
+        margin-top: auto;
+        padding: 1.2rem 0;
+    }
 
-	.about-container {
-		max-width: 720px;
-	}
+    .about-container {
+        max-width: 720px;
+    }
 
-	/* 內容樣式 */
-	.profile-section {
-		flex-direction: column;
-		text-align: center;
-		margin-bottom: 2rem;
-	}
+    /* 內容樣式 */
+    .profile-section {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-	.profile-frame {
-		margin: 0 auto 2rem;
-		max-width: 300px;
-	}
+    .profile-frame {
+        margin: 0 auto 2rem;
+        max-width: 300px;
+    }
 
-	.social-icons {
-		justify-content: center;
-	}
+    .social-icons {
+        justify-content: center;
+    }
 
-	/* 作品集網格 - 平板兩欄 */
-	.portfolio-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
+    /* 作品集網格 - 平板兩欄 */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* 大型設備 (桌面電腦, ≥992px) */
+/* ========== 大型設備 (桌面電腦, ≥992px) ========== */
 @media (min-width: 992px) {
-	.about-container {
-		max-width: 960px;
-	}
+    .about-container {
+        max-width: 960px;
+    }
 
-	footer {
-		margin-top: auto;
-	}
+    footer {
+        margin-top: auto;
+    }
 
-	/* 作品集網格 - 電腦2欄 */
-	.portfolio-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
+    /* 作品集網格 - 電腦2欄 */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* 特大設備 (大型桌面電腦, ≥1200px) */
+/* ========== 特大設備 (大型桌面電腦, ≥1200px) ========== */
 @media (min-width: 1200px) {
-	.about-container {
-		max-width: 1140px;
-	}
+    .about-container {
+        max-width: 1140px;
+    }
 
-	/* 作品集網格 - 大螢幕2欄 */
-	.portfolio-grid {
-		grid-template-columns: repeat(3, 1fr);
-	}
+    /* 作品集網格 - 大螢幕3欄 */
+    .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-/* 平板及以上設備的共同樣式 (≥768px) */
+/* ========== 平板及以上設備的共同樣式 (≥768px) ========== */
 @media (min-width: 768px) {
-	/* 模態窗口樣式 - 平板及以上為左右結構 */
-	.modal-content {
-		flex-direction: row;
-		max-height: 80vh;
-	}
+    /* 模態窗口樣式 - 平板及以上為左右結構 */
+    .modal-content {
+        flex-direction: row;
+        max-height: 80vh;
+    }
 
-	.modal-image {
-		width: 50%;
-		border-radius: 15px 0 0 15px;
-		max-height: 80vh;
-	}
+    .modal-image {
+        width: 50%;
+        border-radius: 15px 0 0 15px;
+        max-height: 80vh;
+    }
 
-	.modal-image img {
-		height: 100%;
-		max-height: none;
-	}
+    .modal-image img {
+        height: 100%;
+        max-height: none;
+    }
 
-	.modal-info {
-		width: 50%;
-		overflow-y: auto;
-	}
+    .modal-info {
+        width: 50%;
+        overflow-y: auto;
+    }
 }

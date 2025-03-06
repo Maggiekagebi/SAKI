@@ -1,4 +1,4 @@
-/* all.css - 全域通用樣式 */
+/* global.css - 全域通用樣式 */
 
 /* 基本樣式設定 */
 * {
@@ -7,12 +7,14 @@
     box-sizing: border-box;
     font-family: 'Poppins', 'Arial', '獅尾牙膏圓體', sans-serif;
 }
+
 /* 設置 html 和 body 高度為 100% */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
+
 body {
     background-color: #fff5f7; /* 淺粉色背景 */
     color: #6d5963;
@@ -20,16 +22,19 @@ body {
     margin: 0;
     padding: 0;
 }
+
 /* 設置 #app 為 flex 容器並佔滿視窗高度 */
 #app {
     display: flex;
     flex-direction: column;
     min-height: 100%;
 }
+
 /* 設置 main 內容區域佔用所有可用空間 */
 main.about-container {
     flex: 1 0 auto; /* 自動擴展填充空間 */
 }
+
 /* 背景裝飾元素 */
 .background-elements {
     position: fixed;
@@ -257,32 +262,113 @@ nav a:hover, nav a.active {
 nav a:hover::after, nav a.active::after {
     width: 100%;
 }
-/* 顯示下拉選單 */
+
+/* 下拉選單專用樣式 */
+/* 主題顏色變量 - 基於您的網站配色方案 */
+:root {
+    --primary-bg: #f3eeff; /* 淡紫色背景 */
+    --primary-text: #a2738c; /* 主要文字顏色 */
+    --menu-hover: #f0e6ff; /* 菜單懸停顏色 */
+    --dropdown-bg: white; /* 下拉選單背景色 */
+    --dropdown-shadow: rgba(158, 130, 255, 0.15); /* 下拉選單陰影 */
+    --dropdown-border: #e9e2ff; /* 下拉選單邊框 */
+}
+
+/* 下拉圖標樣式 */
+.dropdown-icon {
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 5px;
+    transition: transform 0.3s;
+}
+
+.dropdown-icon:hover {
+    transform: translateY(2px);
+}
+
+.has-dropdown {
+    position: relative;
+}
+
+/* 下拉選單基本樣式 */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--dropdown-bg);
+    border: 1px solid var(--dropdown-border);
+    border-radius: 10px;
+    box-shadow: 0 6px 15px var(--dropdown-shadow);
+    min-width: 180px;
+    padding: 8px 0;
+    margin-top: 10px;
+    z-index: 100;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* 當下拉選單顯示時的樣式 */
 .dropdown-menu.show {
+    display: block;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
-/* 下拉選單項目 */
-.dropdown-item {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+/* 添加小三角形箭頭指向頂部 */
+.dropdown-menu:before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--dropdown-bg);
+    z-index: 2;
 }
 
-.dropdown-item a {
+.dropdown-menu:after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid var(--dropdown-border);
+    z-index: 1;
+}
+
+/* 下拉選單項目樣式 */
+.dropdown-menu li {
     display: block;
-    padding: 0.6rem 1.2rem;
-    color: #a2738c;
-    text-decoration: none;
-    transition: all 0.2s;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-.dropdown-item a:hover {
-    background-color: #fff5f7;
+.dropdown-menu li a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--primary-text);
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.dropdown-menu li a:hover {
+    background-color: var(--menu-hover);
     color: #ff8fab;
 }
+
 /* 頁尾區域 */
 footer {
     flex-shrink: 0; /* 防止 footer 被壓縮 */

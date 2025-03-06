@@ -54,19 +54,19 @@
 
             <nav :class="{ 'mobile-open': menuOpen }">
                 <ul>
-                    <li v-for="item in navItems" :key="item.id" :class="{ 'has-dropdown': item.children }">
+                    <li v-for="item in navItems" :key="item.id" :class="{ 'has-dropdown': item.dropdown }">
                         <a 
                             :href="item.link" 
                             :class="{ active: currentPage === item.id }"
-                            @click="item.children ? (item.showDropdown = !item.showDropdown) : closeMenu()"
+                            @click="item.dropdown ? toggleDropdown($event, item.id) : closeMenu()"
                         >
                             {{ item.text }}
-                            <i v-if="item.children" class="fas fa-chevron-down dropdown-icon"></i>
+                            <i v-if="item.dropdown" class="fas fa-chevron-down dropdown-icon" @click.stop="toggleDropdown($event, item.id)"></i>
                         </a>
                         
                         <!-- 下拉選單 -->
-                        <ul v-if="item.children" class="dropdown-menu" :class="{ 'show': item.showDropdown }">
-                            <li v-for="child in item.children" :key="child.id">
+                        <ul v-if="item.dropdown" class="dropdown-menu" :class="{ 'show': activeDropdown === item.id }">
+                            <li v-for="child in item.dropdownItems" :key="child.id">
                                 <a :href="child.link" :class="{ active: currentPage === child.id }" @click="closeMenu">
                                     {{ child.text }}
                                 </a>

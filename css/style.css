@@ -1,4 +1,4 @@
-/* style.css - 特定頁面樣式 */
+/* pages.css - 特定頁面樣式 */
 
 /* ===== 首頁（關於我）樣式 ===== */
 
@@ -8,7 +8,6 @@
     flex-direction: column;
     gap: 3rem;
 }
-
 .profile-section {
     display: flex;
     align-items: center;
@@ -409,7 +408,7 @@
     line-height: 1.8;
 }
 
-/* 管理者上傳頁面樣式 - 可以添加到 style.css 中 */
+/* 管理者上傳頁面樣式 */
 
 /* 管理者認證區域 */
 .admin-notice {
@@ -535,10 +534,10 @@
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(255, 175, 204, 0.2);
-    }
+}
 
 
-/* 部落格頁面樣式 - 添加到 style.css */
+/* 部落格頁面樣式 */
 /* 最新文章部分 */
 .latest-posts {
     margin-top: 4rem;
