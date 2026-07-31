@@ -53,14 +53,19 @@ app.listen(PORT, () => {
 	console.log(`=========================================`);
 	console.log(`🚀 本地微型伺服器已啟動！`);
 	console.log(`📡 監聽端點: http://localhost:${PORT}`);
-	console.log(`💡 正在為您自動開啟管理後台...`);
+	console.log(`=========================================`);
+	console.log(`💡 快速開啟管理後台：`);
+	console.log(
+		`   - 📝 部落格文章管理: http://localhost:${PORT}/admin-upload.html`,
+	);
+	console.log(`   - 🎨 Huh 作品集管理: http://localhost:${PORT}/admin-huh.html`);
 	console.log(`=========================================`);
 
-	// ✨ 新增功能：根據你的作業系統，自動在瀏覽器打開後台網頁
+	// 如果你希望它自動開啟部落格後台，維持這行即可：
 	const url = `http://localhost:${PORT}/admin-upload.html`;
-	const startCommand = process.platform === "win32" ? "start" : "open"; // Windows 用 start，Mac 用 open
+	const startCommand = process.platform === "win32" ? "start" : "open";
 
 	exec(`${startCommand} ${url}`, (err) => {
-		if (err) console.error("自動開啟瀏覽器失敗，請手動點擊上面的網址。");
+		if (err) console.error("自動開啟瀏覽器失敗。");
 	});
 });
