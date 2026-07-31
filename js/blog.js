@@ -80,42 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					},
 				],
 
-				// 最新文章
-				latestPosts: [
-					{
-						id: 1,
-						title: "台北五家必訪的隱藏版甜點店",
-						excerpt:
-							"探索台北巷弄間的甜蜜秘境，這些隱藏版甜點店提供的不只是美味，更是一場視覺與味覺的藝術饗宴...",
-						image: "",
-						date: "2023-05-15",
-						readTime: "5 分鐘",
-						category: "美食",
-						link: "#",
-					},
-					{
-						id: 2,
-						title: "宜蘭三日小旅行：自然與人文的完美結合",
-						excerpt:
-							"宜蘭不只有傳統景點，更有許多值得探索的人文風景和自然美景。從海岸線到山林，從古老街道到現代藝術空間...",
-						image: "",
-						date: "2023-04-28",
-						readTime: "8 分鐘",
-						category: "旅遊",
-						link: "#",
-					},
-					{
-						id: 3,
-						title: "UI設計入門：色彩理論與實際應用",
-						excerpt:
-							"了解色彩理論如何影響用戶體驗，以及如何在UI設計中運用色彩創造和諧的視覺效果。本文將深入淺出地解析...",
-						image: "",
-						date: "2023-03-20",
-						readTime: "10 分鐘",
-						category: "學習筆記",
-						link: "#",
-					},
-				],
+				// 部落格讀取所有文章
+				latestPosts: typeof globalPostsData !== "undefined" ? globalPostsData : [],
 
 				// 當前選中的文章分類過濾器 (預設為 'all' 顯示全部)
 				activeFilter: "all",

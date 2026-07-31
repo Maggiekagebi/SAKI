@@ -116,42 +116,14 @@ document.addEventListener("DOMContentLoaded", function () {
 					},
 				],
 
-				// 2. 首頁最新三篇文章（更改 link 指向 blog.html 並帶上對應的 ID）
-				latestPosts: [
-					{
-						id: 1,
-						title: "台北五家必訪的隱藏版甜點店",
-						excerpt:
-							"探索台北巷弄間的甜蜜秘境，這些隱藏版甜點店提供的不只是美味，更是一場視覺與味覺的藝術饗宴...",
-						image: "",
-						date: "2026-05-15",
-						readTime: "5 分鐘",
-						category: "美食",
-						link: "blog.html?id=1",
-					},
-					{
-						id: 2,
-						title: "宜蘭三日小旅行：自然與人文的完美結合",
-						excerpt:
-							"宜蘭不只有傳統景點，更有許多值得探索的人文風景和自然美景。從海岸線到山林...",
-						image: "",
-						date: "2026-04-28",
-						readTime: "8 分鐘",
-						category: "旅遊",
-						link: "blog.html?id=2",
-					},
-					{
-						id: 3,
-						title: "早秋微涼：一週換季質感平價穿搭分享",
-						excerpt:
-							"轉眼又到了秋天，整理了五套適合約會與上班的日常早秋穿搭，運用平價單品搭出層次感...",
-						image: "",
-						date: "2026-04-10",
-						readTime: "6 分鐘",
-						category: "時尚穿搭",
-						link: "blog.html?id=3",
-					},
-				],
+				// 首頁讀取最新 3 篇，並自動加上連結
+				latestPosts:
+					typeof globalPostsData !== "undefined"
+						? globalPostsData.slice(0, 3).map((post) => ({
+								...post,
+								link: `blog.html?id=${post.id}`,
+							}))
+						: [],
 
 				// 社交媒體連結
 				socialLinks: [
