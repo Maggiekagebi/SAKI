@@ -28,6 +28,26 @@ app.post("/api/posts", (req, res) => {
 	}
 });
 
+// ====== 這是新增給 Huh 的通道 ======
+app.post("/api/huh", (req, res) => {
+	const huhs = req.body;
+	// 將資料寫入獨立的 huh-data.js
+	const fileContent = `const globalHuhData = ${JSON.stringify(huhs, null, 4)};`;
+	const filePath = path.join(__dirname, "js", "huh-data.js");
+
+	try {
+		fs.writeFileSync(filePath, fileContent, "utf8");
+		console.log("✅ 成功寫入 js/huh-data.js");
+		res.json({ success: true, message: "檔案寫入成功" });
+	} catch (err) {
+		console.error("❌ 寫入檔案發生錯誤:", err);
+		if (!res.headersSent) {
+			res.status(500).json({ success: false, message: "檔案寫入失敗" });
+		}
+	}
+});
+// ===================================
+
 const PORT = 3000;
 app.listen(PORT, () => {
 	console.log(`=========================================`);
