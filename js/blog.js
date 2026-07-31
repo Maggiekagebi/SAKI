@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							},
 						],
 					},
-					{ id: "portfolio", text: "創作與剪影", link: "portfolio.html" },
+					{ id: "Huh", text: "Huh?", link: "Huh.html" },
 				],
 
 				// 部落格分類

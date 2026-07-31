@@ -26,6 +26,37 @@
 
 /* ========== 小型設備 (手機, <768px) ========== */
 @media (max-width: 767.98px) {
+	/* 1. 修正首頁：快速分類卡片在手機改為 2 欄或 1 欄，避免擠破寬度 */
+	.category-cards-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+	}
+
+	/* 如果手機螢幕特別小，讓最後一個奇數分類跨整列，或者全改成 1 欄 */
+	@media (max-width: 480px) {
+		.category-cards-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* 2. 修正首頁：最新發布文章網格強制改為單欄排版 */
+	.posts-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	/* 3. 修正文章卡片內容在手機上的內邊距與文字大小 */
+	.post-card {
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.post-image {
+		height: 200px;
+		position: relative;
+	}
+
 	/* 全局布局設定 */
 	html,
 	body {
@@ -133,9 +164,10 @@
 	}
 
 	/* 內容區域樣式 */
+	/* 4. 確保首頁所有卡片 (bio-card) 左右內邊距一致，不超出螢幕 */
 	main.about-container {
-		margin: 2rem auto;
-		padding: 0 1.5rem;
+		padding: 0 1rem;
+		margin: 1.5rem auto;
 	}
 
 	.profile-section {
@@ -165,7 +197,8 @@
 	}
 
 	.bio-card {
-		padding: 1.5rem;
+		padding: 1.5rem 1rem;
+		border-radius: 15px;
 	}
 
 	.tag {

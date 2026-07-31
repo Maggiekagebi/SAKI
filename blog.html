@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>部落格 - 個人網站</title>
+		<title>BLOG</title>
 		<!-- 引入外部CSS文件 -->
 		<link rel="stylesheet" href="css/all.css" />
 		<link rel="stylesheet" href="css/style.css" />
@@ -41,11 +41,13 @@
 				<header>
 					<div class="logo">
 						<a href="index.html" title="回到首頁">
-							<img src="images/Logo.svg" alt="Saki Logo" class="logo-svg" />
+							<img
+								src="images/Logo Design/Logo.svg"
+								alt="Saki Logo"
+								class="logo-svg" />
 						</a>
 					</div>
 
-					<!-- 漢堡選單按鈕 (僅在手機版顯示) -->
 					<div class="hamburger-menu" @click="toggleMenu">
 						<div class="bar" :class="{ 'animate': menuOpen }"></div>
 						<div class="bar" :class="{ 'animate': menuOpen }"></div>
@@ -63,7 +65,10 @@
 									:class="{ active: currentPage === item.id }"
 									@click="item.dropdown ? toggleDropdown($event, item.id) : closeMenu()">
 									{{ item.text }}
-									<i v-if="item.dropdown" class="fas fa-chevron-down dropdown-icon"></i>
+									<i
+										v-if="item.dropdown"
+										class="fas fa-chevron-down dropdown-icon"
+										@click.stop="toggleDropdown($event, item.id)"></i>
 								</a>
 
 								<ul

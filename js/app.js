@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							},
 						],
 					},
-					{ id: "portfolio", text: "創作與剪影", link: "portfolio.html" },
+					{ id: "Huh", text: "Huh?", link: "Huh.html" },
 				],
 
 				// 個人資料
@@ -53,22 +53,20 @@ document.addEventListener("DOMContentLoaded", function () {
 					name: "咲 (SAKI)",
 					greeting: "哈囉！",
 					photo: "images/myphoto.jpg",
-					bio: `我是一位努力精進自己的前端開發者，同時也是熱愛生活、攝影與手繪創作的記錄者。<br>在技術方面，擅長 HTML、CSS、Bootstrap 與 Vue.js；在生活方面，喜歡到處尋覓隱藏版美食、分享實穿 OOTD 與旅行故事。<br><br>
-                    
-                    這個網站不僅是我的技術履歷，更是我探索世界、沉澱思考的隨身筆記。期待在這裡與你分享生活中的點滴靈感與美好！`,
+					bio: `我喜歡把生活中的每一個片刻，用文字、照片與創作慢慢收藏起來。<br>
+					希望透過不同的方式，留下每個值得回味的瞬間。<br><br>
+
+					這個網站是一座屬於我的生活筆記，也是持續成長的紀錄空間。<br>
+					期待能與你分享那些平凡卻美好的日常，讓每一次閱讀都能帶來一點靈感與溫度。`,
 
 					// 升級：結合關鍵技術、學習、美食、穿搭、插畫等 SEO 關鍵字
 					interests: [
-						"前端開發",
-						"Vue.js",
-						"HTML/CSS",
-						"響應式網頁",
+						"學習日誌",
 						"美食探店",
 						"旅遊日誌",
-						"日常 OOTD",
 						"穿搭分享",
 						"數位插畫",
-						"手繪速寫",
+						"手繪",
 						"生活美學",
 						"攝影記錄",
 					],
