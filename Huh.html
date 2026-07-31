@@ -162,29 +162,6 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- 無作品提示 -->
-				<div class="no-content" v-if="projects.length === 0">
-					<p>目前還沒有任何作品。</p>
-				</div>
-
-				<!-- 作品詳情彈窗 -->
-				<div class="project-modal" v-if="showModal" @click="closeModal">
-					<div class="modal-content" @click.stop>
-						<span class="close-modal" @click="closeModal">&times;</span>
-						<div class="modal-image">
-							<img :src="selectedProject.image" :alt="selectedProject.title" />
-						</div>
-						<div class="modal-info">
-							<h3>{{ selectedProject.title }}</h3>
-							<div class="modal-category">{{ selectedProject.category }}</div>
-							<!-- 設置white-space: pre-wrap;就可以在js中\n換行 -->
-							<span style="white-space: pre-wrap"
-								><p>{{ selectedProject.description }}</p></span
-							>
-						</div>
-					</div>
-				</div>
 			</main>
 
 			<!-- 頁尾區域 -->

@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						category: "Draw",
 						description:
 							"日常素描簿裡的鋼筆速寫，觀察不同多肉植物葉片堆疊的線條趣味。",
-						image: "https://via.placeholder.com/600x400?text=Drawing+Sketch",
+						image: "",
 					},
 					{
 						id: 7,
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						category: "OOTD",
 						description:
 							"以大地色系為主的西裝外套，搭配寬鬆垂墜長褲，適合悠閒逛美術館的簡約穿搭。",
-						image: "https://via.placeholder.com/600x400?text=OOTD+Style",
+						image: "",
 					},
 					{
 						id: 8,
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						category: "日常剪影",
 						description:
 							"漫步在台北巷弄中偶然發現的復古咖啡廳，光影灑落在木質桌椅上的溫暖瞬間。",
-						image: "https://via.placeholder.com/600x400?text=Daily+Life",
+						image: "",
 					},
 				];
 			},
