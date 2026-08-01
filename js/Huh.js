@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				// 模態窗口
 				showModal: false,
 				selectedProject: null,
+				currentImageIndex: 0,
 			};
 		},
 
@@ -148,13 +149,35 @@ document.addEventListener("DOMContentLoaded", function () {
 				this.activeFilter = category;
 			},
 
-			// 查看作品詳情
+			// 修改原本的打開彈窗方法
 			viewProjectDetails(project) {
 				this.selectedProject = project;
+				this.currentImageIndex = 0; // 👈 每次打開彈窗，都重置回第 1 張
 				this.showModal = true;
+			},
 
-				// 禁止背景滾動
-				document.body.style.overflow = "hidden";
+			// 👈 新增：下一張
+			nextImage() {
+				if (this.selectedProject.images && this.selectedProject.images.length > 0) {
+					// 如果已經是最後一張，就回到第一張；否則就 +1
+					if (this.currentImageIndex < this.selectedProject.images.length - 1) {
+						this.currentImageIndex++;
+					} else {
+						this.currentImageIndex = 0;
+					}
+				}
+			},
+
+			// 👈 新增：上一張
+			prevImage() {
+				if (this.selectedProject.images && this.selectedProject.images.length > 0) {
+					// 如果是第一張，就跳到最後一張；否則就 -1
+					if (this.currentImageIndex > 0) {
+						this.currentImageIndex--;
+					} else {
+						this.currentImageIndex = this.selectedProject.images.length - 1;
+					}
+				}
 			},
 
 			// 關閉模態窗口

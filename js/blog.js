@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				// 當前選中要閱讀全文的文章
 				selectedPost: null,
 				showModal: false,
+				currentImageIndex: 0,
 			};
 		},
 
@@ -115,8 +116,30 @@ document.addEventListener("DOMContentLoaded", function () {
 			// 閱讀全文 (彈窗呈現完整內容)
 			readFullPost(post) {
 				this.selectedPost = post;
+				this.currentImageIndex = 0;
 				this.showModal = true;
-				document.body.style.overflow = "hidden";
+			},
+
+			// 👈 新增：下一張
+			nextImage() {
+				if (this.selectedPost.images && this.selectedPost.images.length > 0) {
+					if (this.currentImageIndex < this.selectedPost.images.length - 1) {
+						this.currentImageIndex++;
+					} else {
+						this.currentImageIndex = 0;
+					}
+				}
+			},
+
+			// 👈 新增：上一張
+			prevImage() {
+				if (this.selectedPost.images && this.selectedPost.images.length > 0) {
+					if (this.currentImageIndex > 0) {
+						this.currentImageIndex--;
+					} else {
+						this.currentImageIndex = this.selectedPost.images.length - 1;
+					}
+				}
 			},
 
 			// 關閉閱讀全文彈窗

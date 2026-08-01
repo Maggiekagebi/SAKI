@@ -145,7 +145,31 @@
 					<div class="modal-content" @click.stop>
 						<span class="close-modal" @click="closeModal">&times;</span>
 						<div class="modal-image">
-							<img :src="selectedProject.image" :alt="selectedProject.title" />
+							<template
+								v-if="selectedProject.images && selectedProject.images.length > 1">
+								<button class="carousel-btn prev" @click.stop="prevImage">
+									<i class="fas fa-chevron-left"></i>
+								</button>
+
+								<img
+									:src="selectedProject.images[currentImageIndex]"
+									:alt="selectedProject.title" />
+
+								<button class="carousel-btn next" @click.stop="nextImage">
+									<i class="fas fa-chevron-right"></i>
+								</button>
+
+								<div class="carousel-counter">
+									{{ currentImageIndex + 1 }} / {{ selectedProject.images.length }}
+								</div>
+							</template>
+
+							<template
+								v-else-if="selectedProject.image || (selectedProject.images && selectedProject.images.length === 1)">
+								<img
+									:src="selectedProject.images && selectedProject.images.length === 1 ? selectedProject.images[0] : selectedProject.image"
+									:alt="selectedProject.title" />
+							</template>
 						</div>
 						<div class="modal-info">
 							<h3>{{ selectedProject.title }}</h3>
