@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
 							},
 							{
 								id: "outfit",
-								text: "👗 時尚穿搭",
-								link: "blog.html?category=時尚穿搭",
+								text: "👗 素人穿搭",
+								link: "blog.html?category=素人穿搭",
 							},
 							{
 								id: "share",
@@ -100,10 +100,10 @@ document.addEventListener("DOMContentLoaded", function () {
 					},
 					{
 						id: "outfit",
-						title: "時尚穿搭",
-						desc: "日常 OOTD 與穿搭",
+						title: "素人穿搭",
+						desc: "日常 OOTD",
 						icon: "fas fa-tshirt",
-						link: "blog.html?category=時尚穿搭",
+						link: "blog.html?category=素人穿搭",
 						color: "#cdb4db",
 					},
 					{

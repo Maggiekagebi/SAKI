@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
 							},
 							{
 								id: "outfit",
-								text: "👗 時尚穿搭",
-								link: "blog.html?category=時尚穿搭",
+								text: "👗 素人穿搭",
+								link: "blog.html?category=素人穿搭",
 							},
 							{
 								id: "share",
