@@ -550,6 +550,7 @@
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
+	line-clamp: 3;
 	overflow: hidden;
 }
 
@@ -595,7 +596,8 @@
 	display: flex;
 	flex-direction: column;
 	padding: 0 !important; /* 🌟 關鍵：強制歸零，消除圖片周圍白邊 */
-	overflow: hidden; /* 🌟 關鍵：讓圖片自動繼承卡片 15px 圓角 */
+	overflow-y: auto; /* 🌟 關鍵：恢復上下滑動看文字的功能 */
+	overflow-x: hidden; /* 🌟 關鍵：隱藏左右溢出，同時能保持圖片頂部的漂亮圓角 */
 }
 
 /* 關閉按鈕 */
